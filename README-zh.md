@@ -56,6 +56,10 @@ SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
 ```
 
 ----------------------------------------------------------------------
+**[download demo.apk](https://github.com/wlfcolin/SmartLogin/blob/master/apk/demo.apk?raw=true)**
+
+
+----------------------------------------------------------------------
 **jcenter 和 maven center 正在上传**
 
 
