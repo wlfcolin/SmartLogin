@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.aaron.gradle.bintray-release'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -11,8 +13,28 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
     }
+    lintOptions {
+        abortOnError rootProject.ext.abortOnError
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+// cmd
+// ./gradlew --stacktrace bintrayUpload -PbintrayUser=wlfcolin -PbintrayKey=XXXXXXXXXXXXXX -PdryRun=false
+publish {
+    userOrg = 'wlfcolin'
+    groupId = 'me.andy5'
+    artifactId = 'SmartLogin'
+    publishVersion = "$versionName"
+    // archives file('build/outputs/test.jar')
+    desc = 'a easy login lib for android to goto a login activity and get the login results. it is guarantee that never goto the login activity twice, even though they called in different threads.'
+    website = 'https://github.com/wlfcolin/SmartLogin'
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
 }
