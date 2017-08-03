@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DemoApp/DemoApp.iml" filepath="$PROJECT_DIR$/DemoApp/DemoApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartLogin.iml" filepath="$PROJECT_DIR$/SmartLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartLoginLib/SmartLoginLib.iml" filepath="$PROJECT_DIR$/SmartLoginLib/SmartLoginLib.iml" />
+    </modules>
+  </component>
+</project>
