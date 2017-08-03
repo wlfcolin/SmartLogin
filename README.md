@@ -1,16 +1,18 @@
 # SmartLogin
 
-a simple use login lib for android to goto a login activity and get the login results. it is guarantee that never goto the login activity twice, even though they called in different threads.
+a easy login lib for android to goto a login activity and get the login results. it is guarantee that never goto the login activity twice, even though they called in different threads.
 
 
 [中文说明文档](https://github.com/wlfcolin/SmartLogin/blob/master/README-zh.md)
 
 
-** Captures **
+----------------------------------------------------------------------
+**Captures**
 * ![image](https://github.com/wlfcolin/SmartLogin/blob/master/capture/capture.gif)
 
 
-** it is easy to use the lib **
+----------------------------------------------------------------------
+**it is easy to use the lib**
 
 
 * 1.create a activity for your login logic
@@ -56,10 +58,12 @@ SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
 });
 ```
 
-** jcenter and maven center is under uploading **
+----------------------------------------------------------------------
+**jcenter and maven center are under uploading**
 
 
-** LICENSE **
+----------------------------------------------------------------------
+**LICENSE**
 ```
 Copyright 2017 wlfcolin
 
