@@ -9,16 +9,19 @@
 
 
 ----------------------------------------------------------------------
-**简单使用示例**
+**快速开始**
+* 1、在项目app模块的build.gradle配置gradle
+``` java
+compile 'me.andy5:SmartLogin:0.1.0'
+```
 
-
-* 1.创建一个登录界面，写好你的登录逻辑
+* 2、创建一个登录界面，写好你的登录逻辑
 ``` java
 public class LoginActivity extends Activity {
 }
 ```
 
-* 2.如果登录成功，在结束登录界面前调用一下setResult(RESULT_OK)即可
+* 3、如果登录成功，在结束登录界面前调用一下setResult(RESULT_OK)即可
 ``` java
 if(loginSuccess){
     UserManager.getInstance().setLogin(true);
@@ -30,14 +33,14 @@ finish();
 ```
 
 
-* 3.在需要登录的地方调用SmartLogin.requestLogin(Context context, Class<? extends Activity> loginActivity, LoginListener
+* 4、在需要登录的地方调用SmartLogin.requestLogin(Context context, Class<? extends Activity> loginActivity, LoginListener
                              loginListener)
 ``` java
 SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {...});
 ```
 
 
-* 4.在LoginListener做登录成功或者失败逻辑
+* 5、在LoginListener做登录成功或者失败逻辑
 ``` java
 SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
     @Override
@@ -56,11 +59,7 @@ SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
 ```
 
 ----------------------------------------------------------------------
-**[download demo.apk](https://github.com/wlfcolin/SmartLogin/blob/master/apk/demo.apk?raw=true)**
-
-
-----------------------------------------------------------------------
-**jcenter 和 maven center 正在上传**
+**[下载demo.apk](https://github.com/wlfcolin/SmartLogin/blob/master/apk/demo.apk?raw=true)**
 
 
 ----------------------------------------------------------------------

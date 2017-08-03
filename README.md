@@ -12,16 +12,20 @@ a easy login lib for android to goto a login activity and get the login results.
 
 
 ----------------------------------------------------------------------
-**it is easy to use the lib**
 
+**Quick start**
+* 1. add in dependencies in your app module's build.gradle
+``` java
+compile 'me.andy5:SmartLogin:0.1.0'
+```
 
-* 1.create a activity for your login logic
+* 2. create a activity for your login logic
 ``` java
 public class LoginActivity extends Activity {
 }
 ```
 
-* 2.if your logic is success, call the setResult(RESULT_OK) before finish your activity
+* 3. if your logic is success, call the setResult(RESULT_OK) before finish your activity
 ``` java
 if(loginSuccess){
     UserManager.getInstance().setLogin(true);
@@ -33,14 +37,14 @@ finish();
 ```
 
 
-* 3.call SmartLogin.requestLogin(Context context, Class<? extends Activity> loginActivity, LoginListener
+* 4. call SmartLogin.requestLogin(Context context, Class<? extends Activity> loginActivity, LoginListener
                              loginListener) in your logic that need login first
 ``` java
 SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {...});
 ```
 
 
-* 4.do your login success or failure logic in the LoginListener
+* 5. do your login success or failure logic in the LoginListener
 ``` java
 SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
     @Override
@@ -60,10 +64,6 @@ SmartLogin.requestLogin(this, LoginActivity.class, new LoginListener() {
 
 ----------------------------------------------------------------------
 **[download demo.apk](https://github.com/wlfcolin/SmartLogin/blob/master/apk/demo.apk?raw=true)**
-
-
-----------------------------------------------------------------------
-**jcenter and maven center are under uploading**
 
 
 ----------------------------------------------------------------------
