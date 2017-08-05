@@ -56,8 +56,8 @@ public class SmartLoginManager {
      * @param loginListener
      */
     void request(Context context, Class<? extends Activity> loginActivity, LoginListener loginListener) {
-        mLoginListeners.add(loginListener);
         synchronized (mLock) {
+            mLoginListeners.add(loginListener);
             // has been started, just add loginListener
             if (mStartedActivity) {
                 return;
@@ -96,31 +96,27 @@ public class SmartLoginManager {
      */
     void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (!mLoginListeners.isEmpty()) {
-                    for (LoginListener listener : mLoginListeners) {
-                        if (listener == null) {
-                            continue;
-                        }
-                        listener.onSuccess();
-                    }
-                    mLoginListeners.clear();
-                }
-            } else {
-                if (!mLoginListeners.isEmpty()) {
-                    for (LoginListener listener : mLoginListeners) {
-                        if (listener == null) {
-                            continue;
-                        }
-                        listener.onCancel();
-                    }
-                    mLoginListeners.clear();
-                }
-            }
             if (activity != null) {
                 activity.finish();
             }
+            boolean success = false;
+            if (resultCode == Activity.RESULT_OK) {
+                success = true;
+            }
             synchronized (mLock) {
+                if (!mLoginListeners.isEmpty()) {
+                    for (LoginListener listener : mLoginListeners) {
+                        if (listener == null) {
+                            continue;
+                        }
+                        if (success) {
+                            listener.onSuccess();
+                        } else {
+                            listener.onCancel();
+                        }
+                    }
+                    mLoginListeners.clear();
+                }
                 // reset the flag
                 mStartedActivity = false;
             }

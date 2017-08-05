@@ -16,7 +16,7 @@ a easy login lib for android to goto a login activity and get the login results.
 **Quick start**
 * 1. add in dependencies in your app module's build.gradle
 ``` java
-compile 'me.andy5:SmartLogin:0.2.0'
+compile 'me.andy5:SmartLogin:0.3.0'
 ```
 
 * 2. create a activity for your login logic
