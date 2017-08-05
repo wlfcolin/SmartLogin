@@ -19,6 +19,6 @@ public class SmartLogin {
      */
     public static void requestLogin(Context context, Class<? extends Activity> loginActivity, LoginListener
             loginListener) {
-        SmartLoginManager.getInstance(context).request(loginActivity, loginListener);
+        SmartLoginManager.getInstance().request(context, loginActivity, loginListener);
     }
 }

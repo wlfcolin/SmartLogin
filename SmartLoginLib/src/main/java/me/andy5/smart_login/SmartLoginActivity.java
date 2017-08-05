@@ -16,12 +16,12 @@ public class SmartLoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SmartLoginManager.getInstance(this).login(this);
+        SmartLoginManager.getInstance().login(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        SmartLoginManager.getInstance(this).onActivityResult(this, requestCode, resultCode, data);
+        SmartLoginManager.getInstance().onActivityResult(this, requestCode, resultCode, data);
     }
 }

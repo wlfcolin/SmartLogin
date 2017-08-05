@@ -12,7 +12,7 @@
 **快速开始**
 * 1、在项目app模块的build.gradle配置gradle
 ``` java
-compile 'me.andy5:SmartLogin:0.1.0'
+compile 'me.andy5:SmartLogin:0.2.0'
 ```
 
 * 2、创建一个登录界面，写好你的登录逻辑

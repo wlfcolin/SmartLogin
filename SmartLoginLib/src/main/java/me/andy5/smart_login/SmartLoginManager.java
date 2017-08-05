@@ -19,7 +19,6 @@ public class SmartLoginManager {
     private static final int REQUEST_CODE_LOGIN = 100;
     private static SmartLoginManager sInstance;
 
-    private Context mContext;
     // all registered listeners
     private Set<LoginListener> mLoginListeners = new HashSet<>();
     // a flag that the SmartLoginActivity started or not
@@ -27,22 +26,22 @@ public class SmartLoginManager {
     // the login activity
     private Class<? extends Activity> mLoginActivity;
 
+    private Object mLock = new Object();
+
     // private constructor
-    private SmartLoginManager(Context context) {
-        mContext = context.getApplicationContext();
+    private SmartLoginManager() {
     }
 
     /**
      * single instance
      *
-     * @param context
      * @return
      */
-    static SmartLoginManager getInstance(Context context) {
+    static SmartLoginManager getInstance() {
         if (sInstance == null) {
             synchronized (SmartLoginManager.class) {
                 if (sInstance == null) {
-                    sInstance = new SmartLoginManager(context);
+                    sInstance = new SmartLoginManager();
                 }
             }
         }
@@ -52,21 +51,26 @@ public class SmartLoginManager {
     /**
      * request SmartLoginActivity
      *
+     * @param context
      * @param loginActivity
      * @param loginListener
      */
-    synchronized void request(Class<? extends Activity> loginActivity, LoginListener loginListener) {
+    void request(Context context, Class<? extends Activity> loginActivity, LoginListener loginListener) {
         mLoginListeners.add(loginListener);
-        // has been started, just add loginListener
-        if (mStartedActivity) {
-            return;
+        synchronized (mLock) {
+            // has been started, just add loginListener
+            if (mStartedActivity) {
+                return;
+            }
+            mLoginActivity = loginActivity;
+            // started
+            mStartedActivity = true;
         }
-        mLoginActivity = loginActivity;
-        Intent intent = new Intent(mContext, SmartLoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
-        // started
-        mStartedActivity = true;
+        Intent intent = new Intent(context, SmartLoginActivity.class);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 
     /**
@@ -90,7 +94,7 @@ public class SmartLoginManager {
      * @param resultCode
      * @param data
      */
-    synchronized void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == Activity.RESULT_OK) {
                 if (!mLoginListeners.isEmpty()) {
@@ -113,10 +117,12 @@ public class SmartLoginManager {
                     mLoginListeners.clear();
                 }
             }
-            // reset the flag
-            mStartedActivity = false;
             if (activity != null) {
                 activity.finish();
+            }
+            synchronized (mLock) {
+                // reset the flag
+                mStartedActivity = false;
             }
         }
     }
